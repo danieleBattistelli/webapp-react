@@ -1,0 +1,84 @@
+.film-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; 
+  padding: 20px;
+}
+
+.film-card {
+  flex: 1 1 calc(25% - 40px); 
+  margin: 20px; 
+  max-width: 400px; 
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s; /* Aggiunge un effetto hover */
+}
+
+.film-card:hover {
+  transform: scale(1.05); /* Ingrandisce la card al passaggio del mouse */
+}
+
+.film-poster {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px; /* Aggiunge spazio tra l'immagine e il testo */
+}
+
+.film-card h2 {
+  font-size: 1.5em; /* Aumenta la dimensione del font del titolo */
+  margin-bottom: 10px;
+}
+
+.film-card p {
+  font-size: 1.2em; /* Aumenta la dimensione del font del testo */
+  margin-bottom: 10px;
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.hero-image-container {
+  position: relative;
+  width: 80%;
+  max-width: 800px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.hero-image:hover {
+  transform: scale(1.05);
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero-text h1 {
+  font-size: 3em;
+  margin: 0;
+}
+
+.hero-text p {
+  font-size: 2em;
+  margin: 0;
+  margin-top: 10px;
+}
