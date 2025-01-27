@@ -1,7 +1,9 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
+
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 
 
 const FilmCard = ({ film }) => (
@@ -17,11 +19,10 @@ const FilmCard = ({ film }) => (
         {film.abstract}
       </Card.Text>
       <Link to={`/films/${film.id}`} className="btn btn-primary">
-      Mostra Dettagli
+        Mostra Dettagli
       </Link>
     </Card.Body>
   </Card>
-
 );
 
 export default FilmCard;
