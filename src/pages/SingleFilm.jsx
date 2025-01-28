@@ -1,9 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ReviewCard from  "../components/ReviewCard"
+import ReviewCard from "../components/ReviewCard"
+import ReviewForm from "../components/ReviewForm";
 
-
+// // Dati iniziali del form non compilato
+const initialValues = {
+    name: "",
+    text: "",
+    vote: 0,
+};
 
 
 function SingleFilm() {
@@ -11,12 +17,36 @@ function SingleFilm() {
     const { id } = useParams();
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const [film, setFilm] = useState(null);
+    // Stato di campi del form
+    const [formData, setFormData] = useState(initialValues);
 
-    useEffect(() => {
+    const getFilm = () => {
         axios.get(`${backendUrl}/films/${id}`).then((resp) => {
             setFilm(resp.data.data);
         });
+    }
+
+    useEffect(() => {
+        getFilm();
+
     }, []);
+
+    // funzione che invia i dati del form al server quando viene premuto submit
+    const storeReview = (formData) => {
+        console.log("Submit review", film.id, formData);
+        axios
+            .post(`${backendUrl}/films/${film.id}/reviews`, formData)
+            .then((resp) => {
+                console.log(resp);
+                // Azzeriamo i campi del form
+                setFormData(initialValues);
+                // Se il salvataggio della review è andata a buon fine richiediamo i dati aggiornati del libro dal server
+                getFilm();
+            });
+    };
+
+
+
 
     return (
         <>
@@ -34,10 +64,16 @@ function SingleFilm() {
                         <h2 className="text-success" >{film.release_year}</h2>
                         <h3 className="text-warning" >{film.abstract}</h3>
                     </section>
-                    <section>
-                        <div className="row row-cols-1 g-3">
-                            {film.reviews.map(review =>
-                                <ReviewCard key={review.id} review={review} />)}
+                    <section className="mt-5">
+                        <div className="row justify-content-center">
+                            <div className="col-8">
+                                <h2 className="text-center">Invia una nuova recensione</h2>
+                                <ReviewForm
+                                    formData={formData}
+                                    setFormData={setFormData}
+                                    onSubmitFunction={storeReview}
+                                />
+                            </div>
                         </div>
                     </section>
                 </>
